@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>삼삼오오 면회관리 앱</title>
+<style>body{font-family:system-ui,-apple-system,sans-serif;text-align:center;padding:60px 20px;color:#2b3a55}a{color:#d6336c;word-break:break-all}</style>
+</head><body>
+<h2>삼삼오오</h2>
+<p id="m">앱으로 이동하는 중…</p>
+<script>
+fetch('server.json?t='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{location.replace(j.url+'/phone.html')})
+.catch(()=>{document.getElementById('m').textContent='서버 주소를 불러오지 못했습니다. 잠시 후 새로고침해 주세요.'});
+</script>
+<noscript>자바스크립트를 켜 주세요.</noscript>
+</body></html>
