@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>삼삼오오 면회관리 앱</title>
+<style>body{font-family:system-ui,-apple-system,sans-serif;text-align:center;padding:60px 20px;color:#2b3a55;line-height:1.6}a{color:#d6336c;word-break:break-all}.b{display:inline-block;margin-top:24px;padding:12px 22px;border-radius:10px;background:#d6336c;color:#fff;text-decoration:none}.s{color:#8a94a6;font-size:14px}</style>
+</head><body>
+<h2>삼삼오오</h2>
+<p id="m">앱으로 이동하는 중…</p>
+<p class="s" id="s"></p>
+<a class="b" href="https://github.com/yoonho0809/samsamoo-android-releases/releases/latest/download/samsamoo.apk">안드로이드 앱 내려받기</a>
+<script>
+const m=document.getElementById('m'),s=document.getElementById('s');let n=0;
+async function go(){
+  try{
+    const j=await (await fetch('server.json?t='+Date.now(),{cache:'no-store'})).json();
+    const h=await fetch(j.url+'/api/health',{cache:'no-store',signal:AbortSignal.timeout(8000)});
+    if(h.ok&&(await h.json()).name==='삼삼오오'){location.replace(j.url+'/phone.html');return}
+  }catch(e){}
+  n++;m.textContent='앱 서버를 준비하고 있습니다. 이 화면을 그대로 두시면 자동으로 열립니다.';
+  s.textContent='다시 확인 중… ('+n+'번째)';setTimeout(go,10000);
+}
+go();
+</script>
+<noscript>자바스크립트를 켜 주세요.</noscript>
+</body></html>
